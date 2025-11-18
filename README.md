@@ -94,8 +94,7 @@ Security group ensures controlled inbound and open outbound traffic.
 
 Route tables and subnets ensure proper public/private routing.
 
-
-<img width="689" height="516" alt="Screenshot 2025-11-16 at 23 25 41" src="https://github.com/user-attachments/assets/82ec1605-e8da-42c3-8c2c-1fc1b636b790" />
+<img width="688" height="511" alt="Screenshot 2025-11-18 at 18 13 21" src="https://github.com/user-attachments/assets/f05d3c98-fc6b-441f-bcb3-b15a3ab61c4c" />
 
 
 
