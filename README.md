@@ -94,8 +94,9 @@ Security group ensures controlled inbound and open outbound traffic.
 
 Route tables and subnets ensure proper public/private routing.
 
-<img width="688" height="511" alt="Screenshot 2025-11-18 at 18 13 21" src="https://github.com/user-attachments/assets/f05d3c98-fc6b-441f-bcb3-b15a3ab61c4c" />
 
+
+<img width="691" height="524" alt="Screenshot 2025-11-18 at 18 24 48" src="https://github.com/user-attachments/assets/4cb139e7-1728-4950-90d0-29e03c6173ff" />
 
 
 ## AWS Networking Assignment: Application Load Balancer (2)
