@@ -104,3 +104,84 @@ Route tables and subnets ensure proper public/private routing.
 ## Objective: 
 
 Deploy an Application Load Balancer (ALB) with two EC2 instances behind it. Ensure security group (SG) configurations allow only ALB access to EC2 instances while preventing direct access. 
+
+### 1. Launched Two EC2 Instances
+
+Used Amazon Linux 2 as AMI
+
+Placed instances in the same VPC but in different Availability Zones to ensure redundancy.
+
+Used a user data script to install and configure a simple web server (Apache).
+
+```
+#!/bin/bash
+
+yum update -y
+yum install -y httpd
+
+systemctl start httpd
+systemctl enable httpd
+
+echo "<h1>Hello CoderCo from $(hostname -f)</h1>" > /var/www/html/index.html
+```
+Each instance serves a page displaying instance-specific information (e.g., hostname, ID).
+<img width="1268" height="436" alt="Screenshot 2025-11-19 at 23 34 34" src="https://github.com/user-attachments/assets/6a69d6dd-4dcd-488b-a978-ede528e2a393" />
+
+
+### 2. Created an Application Load Balancer (ALB)
+
+Deployed an internet-facing ALB.
+
+Configured listener on HTTP (port 80).
+
+Created a Target Group and registered both EC2 instances.
+
+Enabled and tested health checks to verify that both instances respond correctly.
+
+Verified that the ALB distributes traffic evenly across the instances.
+<img width="1261" height="570" alt="Screenshot 2025-11-19 at 23 34 28" src="https://github.com/user-attachments/assets/112294d2-3ca8-4ac3-b25e-cd3a91a5d069" />
+<img width="1265" height="563" alt="Screenshot 2025-11-19 at 23 34 17" src="https://github.com/user-attachments/assets/15676cfd-572f-4b04-8147-fb7341717e98" />
+
+
+### 3. Configured Security Groups
+ALB Security Group
+
+Allowed inbound HTTP (80) traffic from the internet.
+
+Allowed outbound traffic required for load balancer → target communication.
+
+EC2 Security Group
+
+Allowed inbound HTTP/HTTPS traffic only from the ALB's Security Group.
+
+Denied direct access from the internet (no 0.0.0.0/0 allowed).
+
+Allowed outbound traffic for updates and package installations.
+
+### 4. Tested and Validated
+
+Confirmed that both instances are healthy in the ALB target group.
+
+Accessed the ALB’s DNS name and verified load balancing between both EC2 instances.
+
+Ensured EC2 instances cannot be accessed directly via their public IPs
+<img width="1280" height="800" alt="Screenshot 2025-11-19 at 23 34 08" src="https://github.com/user-attachments/assets/3cca7e1e-b1c1-42dd-9762-f45b30792ab6" />
+
+
+### Result
+
+The final architecture provides:
+
+High availability across multiple AZs
+
+Load balancing using an ALB
+
+Secure traffic flow is restricted through proper SG rules
+
+Simple dynamic web content rendered from each EC2 instance
+
+<img width="924" height="541" alt="Screenshot 2025-11-20 at 20 38 42" src="https://github.com/user-attachments/assets/38c60701-d83a-4efe-83ce-487ab6e59701" />
+
+
+
+This setup forms the foundation for scalable, production-grade workloads on AWS.
